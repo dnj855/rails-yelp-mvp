@@ -7,3 +7,19 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+require "faker"
+
+Restaurant.destroy_all
+Review.destroy_all
+
+Restaurant.create!(10.times.map do
+  {
+    name: Faker::Restaurant.name,
+    address: Faker::Address.full_address,
+    category: Restaurant::CATEGORIES.sample,
+    phone_number: Faker::PhoneNumber.cell_phone_with_country_code
+  }
+end
+)
+
+puts "Created #{Restaurant.all.count} restaurants..."
